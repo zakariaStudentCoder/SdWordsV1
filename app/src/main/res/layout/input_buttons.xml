@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" android:layout_height="wrap_content"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:gravity="left"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="left"
+        android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/b1"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_marginRight="5sp"
+            android:layout_marginBottom="5sp"
+            android:background="@drawable/rounded_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="1" />
+        <Button
+            android:id="@+id/b2"
+            style="?android:attr/buttonStyleSmall"
+            android:background="@drawable/rounded_button"
+            android:layout_marginRight="5sp"
+            android:layout_marginBottom="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2" />
+        <Button
+            android:id="@+id/b3"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_marginBottom="5sp"
+            android:layout_marginRight="5sp"
+            android:background="@drawable/rounded_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3" />
+        <Button
+            android:id="@+id/b4"
+            style="?android:attr/buttonStyleSmall"
+            android:background="@drawable/rounded_button"
+            android:layout_marginRight="5sp"
+            android:layout_marginBottom="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4" />
+        <Button
+            android:id="@+id/b5"
+            style="?android:attr/buttonStyleSmall"
+            android:background="@drawable/rounded_button"
+            android:layout_marginRight="5sp"
+            android:layout_marginBottom="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/bNoteMode"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_marginRight="5sp"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_empty_blue_layout"
+        android:text="N" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="left"
+        android:orientation="horizontal">
+
+     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/b6"
+            style="?android:attr/buttonStyleSmall"
+            android:background="@drawable/rounded_button"
+            android:layout_marginRight="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6"/>
+        <Button
+            android:id="@+id/b7"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:layout_marginRight="5sp"
+            android:layout_height="wrap_content"
+            android:text="7" />
+        <Button
+            android:id="@+id/b8"
+            style="?android:attr/buttonStyleSmall"
+            android:background="@drawable/rounded_button"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="5sp"
+            android:layout_height="wrap_content"
+            android:text="8" />
+        <Button
+            android:id="@+id/b9"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:layout_height="wrap_content"
+            android:text="9" />
+
+    </LinearLayout>
+     <Button
+        android:id="@+id/bClear"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_marginRight="5sp"
+        android:layout_alignParentRight="true"
+         android:background="@drawable/bg_empty_blue_layout"
+        android:layout_marginBottom="5sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="C" />
+    </RelativeLayout>
+
+</LinearLayout>

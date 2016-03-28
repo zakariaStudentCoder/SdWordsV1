@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/panel_bg"
+	android:padding="4sp"
+	>
+	<TextView
+		android:orientation="vertical"
+		android:layout_width="50dp"
+		android:layout_height="50dp"
+		android:layout_margin="@dimen/activity_horizontal_margin"
+		android:background="@drawable/bg_rounded_layout"
+		android:gravity="center"
+		android:layout_gravity="center"
+		android:textColor="@color/colorWhite"
+		android:text="1"
+		android:textSize="40dp"/>
+	<RelativeLayout
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:padding="4sp">
+
+		<TextView
+			android:id="@+id/state"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@+id/sudoku_board"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:textColor="@color/colorBlueDarkH"
+			android:text="state"
+			/>
+		<TextView
+			android:id="@+id/time"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@+id/state"
+			android:gravity="right"
+			android:layout_marginLeft="4sp"
+			android:layout_marginRight="8sp"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text="time"
+			/>
+		<TextView
+			android:id="@+id/last_played"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/state"
+			android:layout_toRightOf="@+id/sudoku_board"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:layout_marginTop="4sp"
+			android:text="last_played"
+			/>
+		<TextView
+			android:id="@+id/created"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/last_played"
+			android:layout_toRightOf="@+id/sudoku_board"
+			android:text="created"
+			/>
+		<TextView
+			android:id="@+id/note"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/created"
+			android:layout_toRightOf="@+id/sudoku_board"
+			android:text="note"
+			/>
+	</RelativeLayout>
+
+</LinearLayout>
+
+
