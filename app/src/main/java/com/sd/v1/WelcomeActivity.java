@@ -43,7 +43,6 @@ public class WelcomeActivity extends Activity {
 
         setContentView(R.layout.activity_welcome);
 
-
         CommonResources.loadResources(this);
         View v  = getWindow().getDecorView().findViewById(android.R.id.content);
         UITools.applyTypeface(CommonResources.getNormalTypeface(), v);
@@ -65,6 +64,10 @@ public class WelcomeActivity extends Activity {
 
     public  void addListnersToButtons()
     {
+
+        // Adding listners to the different buttons
+        // of this activity .
+
         bWords.setOnClickListener(new View.OnClickListener() {
 
             @Override
