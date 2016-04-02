@@ -143,9 +143,8 @@ public class LevelListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_level_list, container, false);
+        View view = inflater.inflate(R.layout.level_grid, container, false);
 
-        mFilterStatus = (TextView)view.findViewById(R.id.filter_status);
 
         ((ListView)view.findViewById(R.id.listView)).setOnCreateContextMenuListener(this);
 

@@ -35,6 +35,8 @@ import com.sd.gui.SudokuListFilter;
 import com.sd.translator.WordWrapper;
 import com.sd.v1.WordsList;
 
+import java.util.ArrayList;
+
 
 /**
  * Wrapper around opensudoku's database.
@@ -359,6 +361,52 @@ public class SudokuDatabase {
 		SQLiteDatabase db = mOpenHelper.getReadableDatabase();
 		return qb.query(db, null, null, null, null, null, "created DESC");
 	}
+
+
+	/*
+	/db.execSQL("CREATE TABLE " + SudokuDatabase.SUDOKU_TABLE_NAME + " ("
+			+ SudokuColumns._ID + " INTEGER PRIMARY KEY,"
+			+ SudokuColumns.FOLDER_ID + " INTEGER,"
+			+ SudokuColumns.CREATED + " INTEGER,"
+			+ SudokuColumns.STATE + " INTEGER,"
+			+ SudokuColumns.TIME + " INTEGER,"
+			+ SudokuColumns.LAST_PLAYED + " INTEGER,"
+			+ SudokuColumns.DATA + " Text,"
+			+ SudokuColumns.PUZZLE_NOTE + " Text"
+			+ ");");
+	*/
+
+	public ArrayList<SudokuTableObject> getSodukuArrayList(long folderID, SudokuListFilter filter)
+	{
+		Cursor cursor = getSudokuList(folderID,filter);
+
+		ArrayList<SudokuTableObject> data = new ArrayList<SudokuTableObject>();
+
+		while(!cursor.isAfterLast())
+		{
+			data.add(
+					new SudokuTableObject(
+					cursor.getInt(cursor.getColumnIndex(SudokuColumns._ID)),
+					cursor.getInt(cursor.getColumnIndex(SudokuColumns.FOLDER_ID)),
+					cursor.getInt(cursor.getColumnIndex(SudokuColumns.CREATED)),
+					cursor.getInt(cursor.getColumnIndex(SudokuColumns.STATE)),
+					cursor.getInt(cursor.getColumnIndex(SudokuColumns.TIME)),
+					cursor.getInt(cursor.getColumnIndex(SudokuColumns.LAST_PLAYED)),
+					cursor.getString(cursor.getColumnIndex(SudokuColumns.DATA)),
+					cursor.getString(cursor.getColumnIndex(SudokuColumns.PUZZLE_NOTE))
+
+			));
+
+			cursor.moveToNext();
+		}
+
+		cursor.close();
+
+
+		return data;
+
+	}
+
 
 	/**
 	 * Returns sudoku game object.

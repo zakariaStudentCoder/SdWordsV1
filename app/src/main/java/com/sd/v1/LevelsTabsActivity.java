@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.sd.utils.CommonResources;
 import com.sd.utils.tools.UITools;
 import com.sd.v1.Fragments.LevelListFragment;
+import com.sd.v1.Fragments.LevelListFragmentGrid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,24 +63,24 @@ public class LevelsTabsActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager)
     {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(LevelListFragment.newInstance(mWord , mWordDescription , 1), LevelListFragment.EASY);
-        adapter.addFragment(LevelListFragment.newInstance(mWord , mWordDescription , 2), LevelListFragment.MEDIUM);
-        adapter.addFragment(LevelListFragment.newInstance(mWord , mWordDescription , 3), LevelListFragment.HARD);
+        adapter.addFragment(LevelListFragmentGrid.newInstance(mWord, mWordDescription, 1), LevelListFragmentGrid.EASY);
+        adapter.addFragment(LevelListFragmentGrid.newInstance(mWord , mWordDescription , 2), LevelListFragmentGrid.MEDIUM);
+        adapter.addFragment(LevelListFragmentGrid.newInstance(mWord , mWordDescription , 3), LevelListFragmentGrid.HARD);
         viewPager.setAdapter(adapter);
     }
 
     private void setupTabs(View v) {
 
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_level_text, null);
-        tabOne.setText(LevelListFragment.EASY);
+        tabOne.setText(LevelListFragmentGrid.EASY);
         tabLayout.getTabAt(0).setCustomView(tabOne);
 
         TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_level_text, null);
-        tabTwo.setText(LevelListFragment.MEDIUM);
+        tabTwo.setText(LevelListFragmentGrid.MEDIUM);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
 
         TextView tabThree = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_level_text, null);
-        tabThree.setText(LevelListFragment.EASY);
+        tabThree.setText(LevelListFragmentGrid.EASY);
         tabLayout.getTabAt(2).setCustomView(tabThree);
     }
 

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:oneshot="true">
-    <item android:drawable="@mipmap/frame_start_1" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_2" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_3" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_4" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_5" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_6" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_7" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_8" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_9" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_10" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_11" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_12" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_13" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_14" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_15" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_16" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_17" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_18" android:duration="300" />
-    <item android:drawable="@mipmap/frame_start_19" android:duration="300" />
+    <item android:drawable="@mipmap/frame_start_1" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_2" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_3" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_4" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_5" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_6" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_7" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_8" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_9" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_10" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_11" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_12" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_13" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_14" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_15" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_16" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_17" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_18" android:duration="100" />
+    <item android:drawable="@mipmap/frame_start_19" android:duration="100" />
 
 </animation-list>

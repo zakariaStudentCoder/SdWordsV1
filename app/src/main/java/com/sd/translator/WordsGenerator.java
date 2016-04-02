@@ -17,7 +17,7 @@ public class WordsGenerator {
         result.add(new WordWrapper("acidulent" , "Having an acid quality; sour; acidulous."));
         result.add(new WordWrapper("abutilons" , "A genus of malvaceous plants of many species, found in the torrid and temperate zones of both continents; -- called also Indian mallow."));
         result.add(new WordWrapper("adjunctly" , "By way of addition or adjunct; in connection with."));
-        result.add(new WordWrapper("alchemist" , "One who practices alchemy."));
+        result.add(new WordWrapper("alchemist" , " One who practices alchemy."));
 
         result.add(new WordWrapper("bandolier" , "n. - A broad leather belt formerly worn by soldiers over the right shoulder and across the breast under the left arm. Originally it was used for supporting the musket and twelve cases for charges, but later only as a cartridge belt. 2\n" +
                 "n. - One of the leather or wooden cases in which the charges of powder were carried. 2"));

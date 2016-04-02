@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.UserDictionary;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,7 @@ import android.widget.TextView;
 
 import com.sd.db.SudokuDatabase;
 import com.sd.db.WordsColumns;
+import com.sd.gui.dialogs.WordDefDialog;
 import com.sd.translator.WordWrapper;
 import com.sd.translator.WordsGenerator;
 import com.sd.translator.WordsListStore;
@@ -67,25 +71,6 @@ public class WordsList extends Activity {
 
         WordsAdapter adapter = new WordsAdapter(WordsList.this , mWordListToAdapter);
         mListView.setAdapter(adapter);
-
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-
-                Object w = mListView.getItemAtPosition(position);
-                if(w instanceof  WordWrapper)
-                {
-                    Intent intent = new Intent(getBaseContext(), LevelsTabsActivity.class);
-
-                    intent.putExtra(WORD, ((WordWrapper) w).getWord());
-                    intent.putExtra(WORD_DESCRIPTION, ((WordWrapper) w).getDefinition());
-
-                    startActivity(intent);
-                }
-            }
-        });
     }
 
 
@@ -130,9 +115,53 @@ public class WordsList extends Activity {
             }
 
             WordWrapper word = getItem(position);
-
-
             viewHolder.text.setText(word.getWord());
+            UITools.applyTypeface(CommonResources.getNormalTypeface(), viewHolder.text);
+
+
+            ImageView imgPlay = (ImageView) convertView.findViewById(R.id.img_play);
+            imgPlay.setTag(new Integer(position));
+            imgPlay.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    Object w = mListView.getItemAtPosition((int)view.getTag());
+                    if(w instanceof  WordWrapper)
+                    {
+                        Intent intent = new Intent(getBaseContext(), LevelsTabsActivity.class);
+
+                        intent.putExtra(WORD, ((WordWrapper) w).getWord());
+                        intent.putExtra(WORD_DESCRIPTION, ((WordWrapper) w).getDefinition());
+
+                        startActivity(intent);
+                    }
+                }
+            });
+
+            ImageView imgDef = (ImageView) convertView.findViewById(R.id.img_def);
+            imgDef.setTag(new Integer(position));
+            imgDef.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    Object w = mListView.getItemAtPosition((int)view.getTag());
+                    if(w instanceof  WordWrapper)
+                    {
+                        WordDefDialog cdd = new WordDefDialog(WordsList.this , ((WordWrapper) w).getWord() , ((WordWrapper) w).getDefinition());
+                        cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+                        Display display =((WindowManager)getSystemService(WordsList.this.WINDOW_SERVICE)).getDefaultDisplay();
+                        int width = display.getWidth();
+                        int height=display.getHeight();
+
+                        cdd.show();
+                        cdd.getWindow().setLayout((6 * width) / 7, (4 * height) / 5);
+
+                    }
+                }
+            });
+
 
             return convertView;
         }
