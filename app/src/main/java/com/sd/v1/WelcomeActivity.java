@@ -131,11 +131,6 @@ public class WelcomeActivity extends Activity {
 
     private void setAnimatedVisibility(Button button)
     {
-        /*
-        Animation animFadeOut = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_out);
-        Animation animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
-        button.setAnimation(animFadeOut);
-         */
         button.setVisibility(View.VISIBLE);
     }
 
