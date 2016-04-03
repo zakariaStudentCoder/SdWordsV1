@@ -27,6 +27,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 import com.sd.games.CellCollection;
 import com.sd.games.FolderInfo;
@@ -245,7 +246,7 @@ public class SudokuDatabase {
 	 * Find folder by name. If no folder is found, null is returned.
 	 *
 	 * @param folderName
-	 * @param db
+
 	 * @return
 	 */
 	public FolderInfo findFolder(String folderName) {
@@ -378,32 +379,44 @@ public class SudokuDatabase {
 
 	public ArrayList<SudokuTableObject> getSodukuArrayList(long folderID, SudokuListFilter filter)
 	{
-		Cursor cursor = getSudokuList(folderID,filter);
+		Log.d("folderID", folderID + "");
+		Cursor c = getSudokuList(folderID,filter);
+		Log.d("cursor_d", "is empty "+(c == null)  + "");
 
-		ArrayList<SudokuTableObject> data = new ArrayList<SudokuTableObject>();
+		ArrayList<SudokuTableObject> r = new ArrayList<SudokuTableObject>();
 
-		while(!cursor.isAfterLast())
+		c.moveToFirst();
+		while(!c.isAfterLast())
 		{
-			data.add(
+			long id = c.getLong(c.getColumnIndex(SudokuColumns._ID));
+			long created = c.getLong(c.getColumnIndex(SudokuColumns.CREATED));
+			String data = c.getString(c.getColumnIndex(SudokuColumns.DATA));
+			long lastPlayed = c.getLong(c.getColumnIndex(SudokuColumns.LAST_PLAYED));
+			int state = c.getInt(c.getColumnIndex(SudokuColumns.STATE));
+			long time = c.getLong(c.getColumnIndex(SudokuColumns.TIME));
+			String note = c.getString(c.getColumnIndex(SudokuColumns.PUZZLE_NOTE));
+			int fId = c.getInt(c.getColumnIndex(SudokuColumns.FOLDER_ID));
+
+			r.add(
 					new SudokuTableObject(
-					cursor.getInt(cursor.getColumnIndex(SudokuColumns._ID)),
-					cursor.getInt(cursor.getColumnIndex(SudokuColumns.FOLDER_ID)),
-					cursor.getInt(cursor.getColumnIndex(SudokuColumns.CREATED)),
-					cursor.getInt(cursor.getColumnIndex(SudokuColumns.STATE)),
-					cursor.getInt(cursor.getColumnIndex(SudokuColumns.TIME)),
-					cursor.getInt(cursor.getColumnIndex(SudokuColumns.LAST_PLAYED)),
-					cursor.getString(cursor.getColumnIndex(SudokuColumns.DATA)),
-					cursor.getString(cursor.getColumnIndex(SudokuColumns.PUZZLE_NOTE))
+							id,
+							fId,
+							created,
+							state,
+							time,
+							lastPlayed,
+							data,
+							note)
 
-			));
+			);
 
-			cursor.moveToNext();
+			c.moveToNext();
 		}
 
-		cursor.close();
+		c.close();
 
 
-		return data;
+		return r;
 
 	}
 

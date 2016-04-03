@@ -45,60 +45,12 @@ public class GridLevelAdapter extends ArrayAdapter<SudokuTableObject> {
         if (itemView == null)
         {
             final LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            itemView = (item.getState() == SudokuGame.GAME_STATE_COMPLETED) ? LayoutInflater.from(getContext()).inflate(R.layout.level1_grid_item_closed,parent, false)
+            itemView = !(item.getState() == SudokuGame.GAME_STATE_COMPLETED) ? LayoutInflater.from(getContext()).inflate(R.layout.level1_grid_item_closed,parent, false)
                                      : LayoutInflater.from(getContext()).inflate(R.layout.level1_grid_item, parent, false);
 
             holder = new ViewHolder();
-            if(item.getState() == SudokuGame.GAME_STATE_COMPLETED) {
-                holder.txtItem = (TextView) itemView.findViewById(R.id.textId);
-
-                switch (mLevel)
-                {
-                    case 1 :
-                    {
-                        imgResource = R.mipmap.ic_level_1_white;
-                    }
-                    break;
-                    case 2 :
-                    {
-                        imgResource = R.mipmap.ic_level_2_white;
-
-                    }
-                    break;
-                    case 3 :
-                    {
-                        imgResource = R.mipmap.ic_level_3_white;
-                    }
-                    break;
-
-                }
-
-            }
-            else
-            {
-
-                switch (mLevel)
-                {
-                    case 1 :
-                    {
-                        imgResource = R.mipmap.ic_level_1_blue;
-                    }
-                    break;
-                    case 2 :
-                    {
-                        imgResource = R.mipmap.ic_level2_blue;
-
-                    }
-                    break;
-                    case 3 :
-                    {
-                        imgResource = R.mipmap.ic_level_3;
-                    }
-                    break;
-
-                }
-
-            }
+            holder.txtItem = (TextView) itemView.findViewById(R.id.textId);
+            holder.imgItem = (ImageView)itemView.findViewById(R.id.imgLevel);
 
             itemView.setTag(holder);
         }
@@ -107,7 +59,64 @@ public class GridLevelAdapter extends ArrayAdapter<SudokuTableObject> {
             holder = (ViewHolder) itemView.getTag();
         }
 
-        holder.txtItem.setText(item.getId() + "");
+        if((item.getState() == SudokuGame.GAME_STATE_COMPLETED)) {
+
+            switch (mLevel)
+            {
+                case 1 :
+                {
+                    imgResource = R.mipmap.ic_level_1_white;
+                }
+                break;
+                case 2 :
+                {
+                    imgResource = R.mipmap.ic_level_2_white;
+
+                }
+                break;
+                case 3 :
+                {
+                    imgResource = R.mipmap.ic_level_3_white;
+                }
+                break;
+
+            }
+
+
+
+            holder.txtItem.setText(item.getId() + "");
+
+
+        }
+        else
+        {
+
+            switch (mLevel)
+            {
+                case 1 :
+                {
+                    imgResource = R.mipmap.ic_level_1_blue;
+                }
+                break;
+                case 2 :
+                {
+                    imgResource = R.mipmap.ic_level2_blue;
+
+                }
+                break;
+                case 3 :
+                {
+                    imgResource = R.mipmap.ic_level_3;
+                }
+                break;
+
+            }
+
+
+        }
+
+
+
         holder.imgItem.setImageResource(imgResource);
 
 

@@ -5,16 +5,16 @@ package com.sd.db;
  */
 public class SudokuTableObject {
 
-    private int id;
+    private long id;
     private int folderId;
-    private int created;
+    private long created;
     private int state;
-    private int time;
-    private int lastPlayed;
+    private long time;
+    private long lastPlayed;
     private String data;
     private String puzzleNote;
 
-    public SudokuTableObject(int id, int folderId, int created, int state, int time, int lastPlayed, String data, String puzzleNote) {
+    public SudokuTableObject(long id, int folderId, long created, int state, long time, long lastPlayed, String data, String puzzleNote) {
         this.id = id;
         this.folderId = folderId;
         this.created = created;
@@ -25,11 +25,11 @@ public class SudokuTableObject {
         this.puzzleNote = puzzleNote;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -41,7 +41,7 @@ public class SudokuTableObject {
         this.folderId = folderId;
     }
 
-    public int getCreated() {
+    public long getCreated() {
         return created;
     }
 
@@ -57,7 +57,7 @@ public class SudokuTableObject {
         this.state = state;
     }
 
-    public int getTime() {
+    public long getTime() {
         return time;
     }
 
@@ -65,7 +65,7 @@ public class SudokuTableObject {
         this.time = time;
     }
 
-    public int getLastPlayed() {
+    public long getLastPlayed() {
         return lastPlayed;
     }
 
