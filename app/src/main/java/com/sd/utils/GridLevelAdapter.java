@@ -42,24 +42,19 @@ public class GridLevelAdapter extends ArrayAdapter<SudokuTableObject> {
 
         SudokuTableObject item = getItem(position);
 
-        if (itemView == null)
-        {
-            final LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            itemView = !(item.getState() == SudokuGame.GAME_STATE_COMPLETED) ? LayoutInflater.from(getContext()).inflate(R.layout.level1_grid_item_closed,parent, false)
-                                     : LayoutInflater.from(getContext()).inflate(R.layout.level1_grid_item, parent, false);
+        final LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        itemView = (item.getState() == SudokuGame.GAME_STATE_PLAYING)
+                ? LayoutInflater.from(getContext()).inflate(R.layout.level1_grid_item,parent, false)
+                : LayoutInflater.from(getContext()).inflate(R.layout.level1_grid_item_closed, parent, false);
 
-            holder = new ViewHolder();
-            holder.txtItem = (TextView) itemView.findViewById(R.id.textId);
-            holder.imgItem = (ImageView)itemView.findViewById(R.id.imgLevel);
+        holder = new ViewHolder();
+        holder.txtItem = (TextView) itemView.findViewById(R.id.textId);
+        holder.imgItem = (ImageView)itemView.findViewById(R.id.imgLevel);
+        holder.id = new Integer(position);
+        itemView.setTag(holder);
 
-            itemView.setTag(holder);
-        }
-        else
-        {
-            holder = (ViewHolder) itemView.getTag();
-        }
 
-        if((item.getState() == SudokuGame.GAME_STATE_COMPLETED)) {
+        if((item.getState() == SudokuGame.GAME_STATE_PLAYING)) {
 
             switch (mLevel)
             {
@@ -82,50 +77,17 @@ public class GridLevelAdapter extends ArrayAdapter<SudokuTableObject> {
 
             }
 
-
-
-            holder.txtItem.setText(item.getId() + "");
-
-
+            holder.txtItem.setText(item != null ? (item.getId() + "") : "Empty");
+            holder.imgItem.setImageResource(imgResource);
         }
-        else
-        {
-
-            switch (mLevel)
-            {
-                case 1 :
-                {
-                    imgResource = R.mipmap.ic_level_1_blue;
-                }
-                break;
-                case 2 :
-                {
-                    imgResource = R.mipmap.ic_level2_blue;
-
-                }
-                break;
-                case 3 :
-                {
-                    imgResource = R.mipmap.ic_level_3;
-                }
-                break;
-
-            }
-
-
-        }
-
-
-
-        holder.imgItem.setImageResource(imgResource);
-
 
         return itemView;
     }
 
-    static class ViewHolder
+    public class ViewHolder
     {
-        ImageView imgItem;
-        TextView txtItem;
+        public  ImageView imgItem;
+        public TextView txtItem;
+        public int id;
     }
 }

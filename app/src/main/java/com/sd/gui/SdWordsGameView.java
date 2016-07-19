@@ -108,9 +108,9 @@ public class SdWordsGameView extends View {
 
         //TypedArray a = context.obtainStyledAttributes(attrs, R.styleable./*, defStyle, 0*/);
 
-        setLineColor(Color.BLUE);
-        setSectorLineColor(Color.BLUE);
-        setTextColor(Color.BLACK);
+        setLineColor(getResources().getColor(R.color.colorBlueDarkH));
+        setSectorLineColor(getResources().getColor(R.color.colorBlueDarkH));
+        setTextColor(getResources().getColor(R.color.colorDarkerText));
         setTextColorReadOnly(Color.BLACK);
         setTextColorNote(Color.BLUE);
         setBackgroundColor(Color.WHITE);
@@ -123,7 +123,7 @@ public class SdWordsGameView extends View {
         setBackgroundColorSecondary(a.getColor(R.styleable.SudokuBoardView_backgroundColorSecondary, Color.GREEN));
         */
 
-        setBackgroundColorReadOnly(Color.parseColor("#E8E8EE"));
+        setBackgroundColorReadOnly(Color.parseColor("#e5ecee"));
         setBackgroundColorTouched(Color.parseColor("#A7FFB4"));
         setBackgroundColorSelected(Color.BLUE);
 
@@ -345,7 +345,7 @@ public class SdWordsGameView extends View {
         }
 
 
-        int sectorLineWidth1 = mSectorLineWidth / 2;
+        int sectorLineWidth1 = mSectorLineWidth / 3;
         int sectorLineWidth2 = sectorLineWidth1 + (mSectorLineWidth % 2);
 
 

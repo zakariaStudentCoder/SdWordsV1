@@ -42,11 +42,16 @@ public class LevelsTabsActivity extends AppCompatActivity {
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("LET US GO !!");
         setSupportActionBar(toolbar);
 
         CommonResources.loadResources(this);
         View v  = getWindow().getDecorView().findViewById(android.R.id.content);
         UITools.applyTypeface(CommonResources.getNormalTypeface(), v);
+
+
+        mWord = getIntent().getStringExtra(WordsList.WORD);
+        mWordDescription = getIntent().getStringExtra(WordsList.WORD_DESCRIPTION);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -56,8 +61,6 @@ public class LevelsTabsActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        mWord = getIntent().getStringExtra(WordsList.WORD);
-        mWordDescription = getIntent().getStringExtra(WordsList.WORD_DESCRIPTION);
     }
 
     private void setupViewPager(ViewPager viewPager)
@@ -72,14 +75,17 @@ public class LevelsTabsActivity extends AppCompatActivity {
     private void setupTabs(View v) {
 
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_level_text, null);
+        UITools.applyTypeface(CommonResources.getNormalTypeface(), tabOne);
         tabOne.setText(LevelListFragmentGrid.EASY);
         tabLayout.getTabAt(0).setCustomView(tabOne);
 
         TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_level_text, null);
+        UITools.applyTypeface(CommonResources.getNormalTypeface(), tabTwo);
         tabTwo.setText(LevelListFragmentGrid.MEDIUM);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
 
         TextView tabThree = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab_level_text, null);
+        UITools.applyTypeface(CommonResources.getNormalTypeface(), tabThree);
         tabThree.setText(LevelListFragmentGrid.EASY);
         tabLayout.getTabAt(2).setCustomView(tabThree);
     }

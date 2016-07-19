@@ -81,7 +81,7 @@ public class WelcomeActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(WelcomeActivity.this, FolderListActivity.class);
+                Intent i = new Intent(WelcomeActivity.this, LevelsTabsActivity.class);
                 startActivity(i);
             }
         });

@@ -1,19 +1,23 @@
 package com.sd.v1.Fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -28,9 +32,12 @@ import com.sd.games.SudokuGame;
 import com.sd.gui.GameTimeFormat;
 import com.sd.gui.SdWordsGameView;
 import com.sd.gui.SudokuListFilter;
+import com.sd.gui.dialogs.WordDefDialog;
+import com.sd.translator.WordWrapper;
 import com.sd.utils.GridLevelAdapter;
 import com.sd.utils.GridLevelItem;
 import com.sd.v1.FolderDetailLoader;
+import com.sd.v1.LevelsTabsActivity;
 import com.sd.v1.R;
 import com.sd.v1.SdWordPlayActivity;
 import com.sd.v1.WordsList;
@@ -123,8 +130,6 @@ public class LevelListFragmentGrid extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment LevelListFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -133,8 +138,8 @@ public class LevelListFragmentGrid extends Fragment {
         Bundle args = new Bundle();
 
         args.putInt(LEVEL, level);
-        args.putString(WORD, word);
-        args.putString(DESCRIPTION, description);
+        args.putString(WordsList.WORD, word);
+        args.putString(WordsList.WORD_DESCRIPTION, description);
 
         fragment.setArguments(args);
         return fragment;
@@ -146,8 +151,8 @@ public class LevelListFragmentGrid extends Fragment {
         if (getArguments() != null)
         {
             mLevel = getArguments().getInt(LEVEL);
-            mWord = getArguments().getString(WORD);
-            mDescrption = getArguments().getString(DESCRIPTION);
+            mWord = getArguments().getString(WordsList.WORD);
+            mDescrption = getArguments().getString(WordsList.WORD_DESCRIPTION);
         }
     }
 
@@ -169,6 +174,38 @@ public class LevelListFragmentGrid extends Fragment {
 
 
         data =  mDatabase.getSodukuArrayList(mLevel, mListFilter);
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                GridLevelAdapter.ViewHolder vw = (GridLevelAdapter.ViewHolder)view.getTag();
+                Object obj = gridview.getItemAtPosition(vw.id);
+                if(obj instanceof SudokuTableObject)
+                {
+                    if(((SudokuTableObject) obj).getState() == SudokuGame.GAME_STATE_PLAYING)
+                    {
+                        playSudoku(((SudokuTableObject) obj).getId());
+                    }
+                    else
+                    {
+
+                        Activity act = LevelListFragmentGrid.this.getActivity();
+                        WordDefDialog cdd = new WordDefDialog(act , "Note" , "Please solve the previous problem first . Thanks !!");
+                        cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                        Display display =((WindowManager)act.getSystemService(act.WINDOW_SERVICE)).getDefaultDisplay();
+                        int width = display.getWidth();
+                        int height=display.getHeight();
+
+                        cdd.show();
+                        cdd.getWindow().setLayout((6 * width) / 7, (4 * height) / 5);
+
+                        return;
+                    }
+                }
+
+            }
+        });
+
         setDataAdapter();
         return view;
     }

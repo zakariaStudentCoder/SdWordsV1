@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.sd.db.SudokuDatabase;
@@ -34,6 +38,8 @@ import java.util.HashMap;
 import java.util.Set;
 import com.sd.gui.Timer;
 import com.sd.translator.WordWrapper;
+import com.sd.utils.CommonResources;
+import com.sd.utils.tools.UITools;
 
 
 public class SdWordPlayActivity extends AppCompatActivity {
@@ -82,19 +88,24 @@ public class SdWordPlayActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);
 
-        mDatabase = new SudokuDatabase(getApplicationContext());
+        CommonResources.loadResources(this);
+        View v  = getWindow().getDecorView().findViewById(android.R.id.content);
+        UITools.applyTypeface(CommonResources.getBoldTypeface(), v);
 
+        mDatabase = new SudokuDatabase(getApplicationContext());
         mWord = getIntent().getStringExtra(WordsList.WORD);
         mWordDescription = getIntent().getStringExtra(WordsList.WORD_DESCRIPTION);
 
-
-        if(mWord != null) {
+        if(mWord != null)
+        {
             mTranslator = new WordNumberTranslator(true , mWord);
         }
         else
         {
             mTranslator = new WordNumberTranslator(false , "ABLUTIONS");
         }
+
+        //Log.d("WORD_RECEIVED" , mWord);
 
         mInputButtons = (View)findViewById(R.id.input_buttons);
         activityInstance = this;
@@ -162,7 +173,12 @@ public class SdWordPlayActivity extends AppCompatActivity {
         }
         else if (id == R.id.action_show_errors)
         {
+            item.setIcon(R.mipmap.error_icon_clicked);
             mSudokuBoard.setHighlightWrongVals();
+        }
+        else if(id == R.id.action_hint_mode)
+        {
+            item.setIcon(R.mipmap.hint_mode_active);
         }
         else if(id == R.id.action_show_restart)
         {
@@ -266,7 +282,7 @@ public class SdWordPlayActivity extends AppCompatActivity {
         // Input buttons
         for(final int i : keys)
         {
-            Button button = (Button)mInputButtons.findViewById(mDictionnaryInputButtons.get(i));
+            final Button button = (Button)mInputButtons.findViewById(mDictionnaryInputButtons.get(i));
 
             //Adjust width
             button.setText((mTranslator != null) ? mTranslator.getTranslateNumberFromWord(i) : "-1");
@@ -278,9 +294,11 @@ public class SdWordPlayActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (isNoteModeActive) {
                         onInputButtonClickedNoteMode(i);
+                        button.setTextColor(getResources().getColor(R.color.colorWhite));
                         BindCellToNotes();
                     } else {
                         onInputButtonClicked(i);
+                        button.setTextColor(getResources().getColor(R.color.colorDarkerText));
                         BindCellToNotes();
                     }
                 }
@@ -288,7 +306,7 @@ public class SdWordPlayActivity extends AppCompatActivity {
         }
 
         //Clear button
-        ((Button)mInputButtons.findViewById(R.id.bClear)).setOnClickListener(new View.OnClickListener() {
+        ((ImageView)mInputButtons.findViewById(R.id.bClear)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Cell mSelectedCell = mSudokuBoard.getSelectedCell();
@@ -302,28 +320,34 @@ public class SdWordPlayActivity extends AppCompatActivity {
         });
 
         //Note mode
-        final Button bNode = (Button)mInputButtons.findViewById(R.id.bNoteMode);
+        final ImageView bNode = (ImageView) mInputButtons.findViewById(R.id.bNoteMode);
+        final RelativeLayout bLoadrelativeLayout = (RelativeLayout)mInputButtons.findViewById(R.id.bNoteModeLayout);
         bNode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isNoteModeActive = !isNoteModeActive;
-                if (bNode.getText().equals("N")) {
-                    bNode.setText("N(A)");
+
+                if (!isNoteModeActive) {
+                    bNode.setImageResource(R.mipmap.pin_note_active);
+                    bLoadrelativeLayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_button_pressed));
                     BindCellToNotes();
                 } else {
-                    bNode.setText("N");
-
+                    bNode.setImageResource(R.mipmap.pin_mode_desactivated);
+                    bLoadrelativeLayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_button));
                     for (int i = 1; i <= 9; i++) {
                         Button button = (Button) mInputButtons.findViewById(mDictionnaryInputButtons.get(i));
                         if(mSelectedCell.getNote() != null && mSelectedCell.getNote().getNotedNumbers() != null) {
                             if (mSelectedCell.getNote().getNotedNumbers().contains(i)) {
                                 button.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_button_pressed));
+                                button.setTextColor(getResources().getColor(R.color.colorWhite));
                             } else {
                                 button.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_button));
+                                button.setTextColor(getResources().getColor(R.color.colorDarkerText));
                             }
                         }
                     }
                 }
+
+                isNoteModeActive = !isNoteModeActive;
 
             }
         });
@@ -449,8 +473,11 @@ public class SdWordPlayActivity extends AppCompatActivity {
                 if(mSelectedCell.getNote() != null && mSelectedCell.getNote().getNotedNumbers() != null) {
                     if (mSelectedCell.getNote().getNotedNumbers().contains(i)) {
                         button.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_button_pressed));
+                        button.setTextColor(getResources().getColor(R.color.colorWhite));
                     } else {
                         button.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_button));
+                        button.setTextColor(getResources().getColor(R.color.colorDarkerText));
+
                     }
                 }
             }
@@ -461,6 +488,7 @@ public class SdWordPlayActivity extends AppCompatActivity {
                 Button button = (Button) mInputButtons.findViewById(mDictionnaryInputButtons.get(i));
                 if(mSelectedCell.getNote() != null && mSelectedCell.getNote().getNotedNumbers() != null) {
                     button.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_button));
+                    button.setTextColor(getResources().getColor(R.color.colorDarkerText));
                 }
             }
 

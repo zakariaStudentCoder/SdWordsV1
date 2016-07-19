@@ -384,7 +384,7 @@ public class SudokuDatabase {
 		Log.d("cursor_d", "is empty "+(c == null)  + "");
 
 		ArrayList<SudokuTableObject> r = new ArrayList<SudokuTableObject>();
-
+        int lastState = -1;
 		c.moveToFirst();
 		while(!c.isAfterLast())
 		{
@@ -397,19 +397,31 @@ public class SudokuDatabase {
 			String note = c.getString(c.getColumnIndex(SudokuColumns.PUZZLE_NOTE));
 			int fId = c.getInt(c.getColumnIndex(SudokuColumns.FOLDER_ID));
 
-			r.add(
-					new SudokuTableObject(
-							id,
-							fId,
-							created,
-							state,
-							time,
-							lastPlayed,
-							data,
-							note)
+			int modifiedStatus = -1;
+			if((lastState == -1 && folderID == 1) || lastState == SudokuGame.GAME_STATE_COMPLETED)
+			{
+				modifiedStatus = SudokuGame.GAME_STATE_PLAYING;
+			}
+			else
+			{
+				modifiedStatus = SudokuGame.GAME_STATE_NOT_STARTED;
+			}
 
+			r.add(
+				new SudokuTableObject
+				(
+						id,
+						fId,
+						created,
+						modifiedStatus,
+						time,
+						lastPlayed,
+						data,
+						note
+				)
 			);
 
+			lastState = state;
 			c.moveToNext();
 		}
 
